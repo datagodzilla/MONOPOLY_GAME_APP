@@ -74,21 +74,26 @@
 }
 
 .square-indicator {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 3px solid #dee2e6;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .square-position {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 28px;
+  font-weight: 900;
+  color: #495057;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .square-name {
@@ -190,24 +195,50 @@
 }
 
 .path-node {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  font-size: 14px;
+  font-weight: 900;
+  color: #495057;
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 3px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid #adb5bd;
+  font-size: 15px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
-.path-node.start,
+.path-node.start {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  border-width: 3px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-color: #adb5bd;
+  color: #495057;
+}
+
 .path-node.end {
-  width: 50px;
-  height: 50px;
-  font-size: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+  box-shadow:
+    0 4px 12px rgba(255, 215, 0, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  border-width: 3px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+  border-color: #FFA500;
+  color: #6c5a00;
 }
 
 .path-connector {

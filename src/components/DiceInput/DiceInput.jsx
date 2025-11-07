@@ -54,7 +54,6 @@ const DiceInput = ({ onRoll }) => {
 
   return (
     <div className="dice-input">
-      <h1 className="dice-input__main-title">WELCOME TO MEGA MONOPOLY RULES!!</h1>
       <h2 className="dice-input__subtitle">Roll the Dice!</h2>
 
       {/* First Regular Die */}

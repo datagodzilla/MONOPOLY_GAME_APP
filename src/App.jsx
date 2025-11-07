@@ -5,6 +5,7 @@ import DiceAnimation from './components/DiceAnimation/DiceAnimation'
 import RulesDisplay from './components/RulesDisplay/RulesDisplay'
 import PositionInput from './components/PositionTracker/PositionInput'
 import MovementDisplay from './components/MovementDisplay/MovementDisplay'
+import SpecialSquareRules from './components/SpecialSquareRules/SpecialSquareRules'
 import { getGameRule } from './utils/gameRules'
 import { calculateMovement } from './utils/movementEngine'
 
@@ -64,6 +65,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="app-main-title">WELCOME TO MEGA MONOPOLY RULES!!</h1>
       {currentPhase === 'input' && (
         <>
           <PositionInput
@@ -90,6 +92,10 @@ function App() {
           )}
 
           <RulesDisplay gameRule={gameRule} />
+
+          {movementResult && movementResult.landedSquare && (
+            <SpecialSquareRules square={movementResult.landedSquare} />
+          )}
 
           <button className="try-again-button" onClick={handleTryAgain}>
             ROLL DICE AGAIN!! 🎲

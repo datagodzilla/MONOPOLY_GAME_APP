@@ -8,8 +8,7 @@ import './PositionInput.css';
 import boardData from '../../data/boardSquares.json';
 
 const PositionInput = ({ currentPosition, onPositionChange, showVisual = true }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [inputMode, setInputMode] = useState('dropdown'); // 'dropdown' or 'visual'
+  const [inputMode, setInputMode] = useState('visual');
 
   const squares = boardData.squares;
 
@@ -53,128 +52,126 @@ const PositionInput = ({ currentPosition, onPositionChange, showVisual = true })
 
   return (
     <div className="position-input">
-      <div className="position-header">
-        <button
-          className="toggle-button"
-          onClick={() => setIsExpanded(!isExpanded)}
-          aria-expanded={isExpanded}
-          aria-controls="position-content"
-        >
-          <span className="toggle-icon">{isExpanded ? '▼' : '▶'}</span>
-          Track Your Position (Optional)
-        </button>
-        {currentPosition !== null && (
-          <div className="current-position-badge">
-            Position: {currentPosition} - {squares[currentPosition].name}
-          </div>
-        )}
-      </div>
+      {currentPosition !== null && (
+        <div className="current-position-badge">
+          Position: {currentPosition} - {squares[currentPosition].name}
+        </div>
+      )}
 
-      {isExpanded && (
-        <div id="position-content" className="position-content">
-          <div className="input-mode-selector">
+      <div className="position-content">
+        <div className="input-mode-selector">
+          {showVisual && (
             <button
-              className={`mode-button ${inputMode === 'dropdown' ? 'active' : ''}`}
-              onClick={() => setInputMode('dropdown')}
-              aria-pressed={inputMode === 'dropdown'}
+              className={`mode-button ${inputMode === 'visual' ? 'active' : ''}`}
+              onClick={() => setInputMode('visual')}
+              aria-pressed={inputMode === 'visual'}
             >
-              Dropdown List
+              Visual Board
             </button>
-            {showVisual && (
-              <button
-                className={`mode-button ${inputMode === 'visual' ? 'active' : ''}`}
-                onClick={() => setInputMode('visual')}
-                aria-pressed={inputMode === 'visual'}
-              >
-                Visual Board
-              </button>
-            )}
-          </div>
+          )}
+          <button
+            className={`mode-button ${inputMode === 'dropdown' ? 'active' : ''}`}
+            onClick={() => setInputMode('dropdown')}
+            aria-pressed={inputMode === 'dropdown'}
+          >
+            Dropdown List
+          </button>
+        </div>
 
-          {inputMode === 'dropdown' ? (
-            <div className="dropdown-mode">
-              <label htmlFor="position-select" className="select-label">
-                Select your current square:
-              </label>
-              <select
-                id="position-select"
-                className="position-select"
-                value={currentPosition !== null ? currentPosition : ''}
-                onChange={(e) => handlePositionSelect(parseInt(e.target.value))}
-                aria-label="Current board position"
-              >
-                <option value="">-- Select Position --</option>
-                {squares.map((square) => (
-                  <option key={square.id} value={square.id}>
-                    {square.id} - {getSquareIcon(square)} {square.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : (
-            <div className="visual-mode">
-              <div className="square-grid">
-                {squares.map((square) => (
-                  <button
-                    key={square.id}
-                    className={`square-button ${currentPosition === square.id ? 'selected' : ''}`}
-                    onClick={() => handlePositionSelect(square.id)}
-                    style={{
-                      borderColor: square.color ? getSquareColor(square) : '#CCCCCC',
-                      borderWidth: '3px'
-                    }}
-                    aria-label={`Position ${square.id}: ${square.name}`}
-                    aria-pressed={currentPosition === square.id}
-                  >
+        {inputMode === 'dropdown' ? (
+          <div className="dropdown-mode">
+            <label htmlFor="position-select" className="select-label">
+              Select your current square:
+            </label>
+            <select
+              id="position-select"
+              className="position-select"
+              value={currentPosition !== null ? currentPosition : ''}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === '') {
+                  handleClear();
+                } else {
+                  handlePositionSelect(parseInt(value));
+                }
+              }}
+              aria-label="Current board position"
+            >
+              <option value="">-- Select your position --</option>
+              {squares.map((square) => (
+                <option key={square.id} value={square.id}>
+                  {square.id} - {getSquareIcon(square)} {square.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          <div className="visual-mode">
+            <div className="square-grid">
+              {squares.map((square) => (
+                <button
+                  key={square.id}
+                  className={`square-button ${currentPosition === square.id ? 'selected' : ''}`}
+                  onClick={() => handlePositionSelect(square.id)}
+                  aria-label={`Position ${square.id}: ${square.name}`}
+                  aria-pressed={currentPosition === square.id}
+                >
+                  {square.color && (
+                    <div
+                      className="square-color-bar"
+                      style={{ backgroundColor: getSquareColor(square) }}
+                    />
+                  )}
+                  <div className="square-content">
                     <div className="square-number">{square.id}</div>
                     <div className="square-icon">{getSquareIcon(square)}</div>
                     <div className="square-name">{square.name}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {currentPosition !== null && (
-            <div className="selected-position-details">
-              <div className="detail-card">
-                <h4>Current Position</h4>
-                <div className="detail-row">
-                  <span className="label">Square:</span>
-                  <span className="value">{squares[currentPosition].name}</span>
-                </div>
-                <div className="detail-row">
-                  <span className="label">Number:</span>
-                  <span className="value">{currentPosition}</span>
-                </div>
-                <div className="detail-row">
-                  <span className="label">Type:</span>
-                  <span className="value">{squares[currentPosition].type}</span>
-                </div>
-                {squares[currentPosition].price && (
-                  <div className="detail-row">
-                    <span className="label">Price:</span>
-                    <span className="value">${squares[currentPosition].price}</span>
                   </div>
-                )}
-              </div>
-              <button
-                className="clear-button"
-                onClick={handleClear}
-                aria-label="Clear position selection"
-              >
-                Clear Position
-              </button>
+                </button>
+              ))}
             </div>
-          )}
-
-          <div className="position-tips">
-            <p className="tip-text">
-              💡 <strong>Tip:</strong> Select your current position to see where you'll land after rolling the dice!
-            </p>
           </div>
+        )}
+
+        {currentPosition !== null && (
+          <div className="selected-position-details">
+            <div className="detail-card">
+              <h4>Current Position</h4>
+              <div className="detail-row">
+                <span className="label">Square:</span>
+                <span className="value">{squares[currentPosition].name}</span>
+              </div>
+              <div className="detail-row">
+                <span className="label">Number:</span>
+                <span className="value">{currentPosition}</span>
+              </div>
+              <div className="detail-row">
+                <span className="label">Type:</span>
+                <span className="value">{squares[currentPosition].type}</span>
+              </div>
+              {squares[currentPosition].price && (
+                <div className="detail-row">
+                  <span className="label">Price:</span>
+                  <span className="value">${squares[currentPosition].price}</span>
+                </div>
+              )}
+            </div>
+            <button
+              className="clear-button"
+              onClick={handleClear}
+              aria-label="Clear position selection"
+            >
+              Clear Position
+            </button>
+          </div>
+        )}
+
+        <div className="position-tips">
+          <p className="tip-text">
+            💡 <strong>Tip:</strong> Select your current position to see where you'll land after rolling the dice!
+          </p>
         </div>
-      )}
+      </div>
     </div>
   );
 };

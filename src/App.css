@@ -6,6 +6,47 @@
   padding: 2rem;
 }
 
+/* Main Title */
+.app-main-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-align: center;
+  color: white;
+  margin: 0 0 2rem 0;
+  font-family: 'Arial Black', 'Helvetica Bold', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(180deg, #E40B2E 0%, #C00A26 100%);
+  padding: 1.5rem 3rem;
+  border: 8px solid white;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow:
+    3px 3px 0px #000,
+    -1px -1px 0px #000,
+    1px -1px 0px #000,
+    -1px 1px 0px #000,
+    1px 1px 0px #000,
+    4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Container to center the title */
+.App > .app-main-title {
+  display: block;
+  width: auto;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Results Phase */
 .results-phase {
   max-width: 900px;
@@ -81,6 +122,11 @@
 @media (max-width: 767px) {
   .App {
     padding: 1rem;
+  }
+
+  .app-main-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .results-summary h2 {

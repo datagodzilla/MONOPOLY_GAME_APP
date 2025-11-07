@@ -37,10 +37,7 @@ const MovementDisplay = ({ movementResult }) => {
     return (
       <div className={`square-card ${isHighlighted ? 'highlighted' : ''}`}>
         <div className="card-label">{label}</div>
-        <div
-          className="square-indicator"
-          style={{ backgroundColor: getSquareColor(square) }}
-        >
+        <div className="square-indicator">
           <div className="square-position">{square.id}</div>
         </div>
         <div className="square-name">{square.name}</div>
@@ -100,6 +97,37 @@ const MovementDisplay = ({ movementResult }) => {
   const renderBusOptions = () => {
     if (type !== 'bus' || !options) return null;
 
+    const busRules = {
+      icon: '🚌',
+      title: 'Bus Ticket - Railroad Space',
+      mainRules: [
+        'You landed on a Railroad with a Bus Ticket',
+        'You can choose to move normally OR take the bus to the next Bus Ticket space',
+        'All four Railroads have Bus Tickets (Reading, Pennsylvania, B&O, Short Line)',
+        'The bus always goes clockwise to the next Railroad'
+      ],
+      scenarios: [
+        {
+          title: 'Normal Movement',
+          description: 'Continue with your dice roll as usual. This is safer if the bus destination has hotels or high rent'
+        },
+        {
+          title: 'Take the Bus',
+          description: 'Jump directly to the next Railroad (Bus Ticket space). This can help you pass GO or avoid dangerous properties'
+        },
+        {
+          title: 'Strategic Choice',
+          description: 'Consider: Will you pass GO? Are there expensive properties ahead? Is the bus destination owned by an opponent?'
+        }
+      ],
+      tips: [
+        'Taking the bus can help you pass GO faster for that $200!',
+        'Use the bus to skip over dangerous property groups with hotels',
+        'If you own the next Railroad, taking the bus is always safe',
+        'The bus can be a strategic escape from expensive neighborhoods'
+      ]
+    };
+
     return (
       <div className="bus-options">
         <h3 className="bus-title">🚌 Bus Choice!</h3>
@@ -130,6 +158,43 @@ const MovementDisplay = ({ movementResult }) => {
               <p>Jump to next Bus Ticket</p>
               {options.bus.passedGO && <div className="passed-go-badge">Passed GO! +$200</div>}
             </div>
+          </div>
+        </div>
+
+        <div className="special-square-rules">
+          <div className="rules-header">
+            <span className="rules-icon">{busRules.icon}</span>
+            <h3 className="rules-title">{busRules.title}</h3>
+          </div>
+
+          <div className="rules-section">
+            <h4 className="section-title">📋 Main Rules</h4>
+            <ul className="rules-list">
+              {busRules.mainRules.map((rule, index) => (
+                <li key={index} className="rule-item">{rule}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rules-section">
+            <h4 className="section-title">🎯 Your Options</h4>
+            <div className="scenarios-grid">
+              {busRules.scenarios.map((scenario, index) => (
+                <div key={index} className="scenario-card">
+                  <h5 className="scenario-title">{scenario.title}</h5>
+                  <p className="scenario-description">{scenario.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rules-section tips-section">
+            <h4 className="section-title">💡 Helpful Tips</h4>
+            <ul className="tips-list">
+              {busRules.tips.map((tip, index) => (
+                <li key={index} className="tip-item">{tip}</li>
+              ))}
+            </ul>
           </div>
         </div>
 

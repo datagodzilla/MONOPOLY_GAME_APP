@@ -11,49 +11,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.position-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.toggle-button {
-  background: linear-gradient(135deg, #00A550 0%, #00843F 100%);
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 165, 80, 0.3);
-}
-
-.toggle-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 165, 80, 0.4);
-}
-
-.toggle-button:active {
-  transform: translateY(0);
-}
-
-.toggle-button:focus {
-  outline: 3px solid #FFD700;
-  outline-offset: 2px;
-}
-
-.toggle-icon {
-  font-size: 14px;
-  transition: transform 0.3s ease;
-}
-
 .current-position-badge {
   background: #FFD700;
   color: #333;
@@ -62,22 +19,12 @@
   font-weight: 600;
   font-size: 16px;
   box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3);
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .position-content {
-  margin-top: 20px;
-  animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  margin-top: 0;
 }
 
 .input-mode-selector {
@@ -91,24 +38,122 @@
 
 .mode-button {
   flex: 1;
-  background: white;
-  border: 2px solid #ddd;
-  padding: 12px 20px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #00A550 0%, #00843F 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 10px 10px 0 0;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 165, 80, 0.2),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+.mode-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.1));
+  border-radius: 10px 10px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .mode-button:hover {
-  border-color: #00A550;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 165, 80, 0.3),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.mode-button:hover::before {
+  opacity: 1;
 }
 
 .mode-button.active {
-  background: #00A550;
-  color: white;
-  border-color: #00A550;
+  background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+  color: #333;
+  transform: translateY(-8px) scale(1.05);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(255, 215, 0, 0.4),
+    0 16px 32px rgba(255, 215, 0, 0.3),
+    inset 0 1px 3px rgba(255, 255, 255, 0.3),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.2);
+  animation: tabPulse 2s ease-in-out infinite;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  z-index: 10;
+}
+
+.mode-button.active::before {
+  opacity: 1;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.05));
+}
+
+.mode-button.active::after {
+  content: '✓';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #FFD700;
+  color: #333;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+  animation: checkmarkPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 3px solid white;
+}
+
+@keyframes tabPulse {
+  0%, 100% {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 8px 16px rgba(255, 215, 0, 0.4),
+      0 16px 32px rgba(255, 215, 0, 0.3),
+      inset 0 1px 3px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 12px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 10px 20px rgba(255, 215, 0, 0.5),
+      0 20px 40px rgba(255, 215, 0, 0.4),
+      inset 0 1px 3px rgba(255, 255, 255, 0.3),
+      inset 0 -6px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 .mode-button:focus {
@@ -132,22 +177,56 @@
 .position-select {
   width: 100%;
   padding: 14px 16px;
+  padding-right: 48px;
   font-size: 16px;
-  border: 3px solid #ddd;
+  border: 3px solid #0066CC;
   border-radius: 12px;
-  background: white;
+  background: linear-gradient(135deg, #4A90E2 0%, #2E5C99 100%);
+  color: white;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image:
+    linear-gradient(135deg, #4A90E2 0%, #2E5C99 100%),
+    linear-gradient(45deg, transparent 50%, #FFD700 50%),
+    linear-gradient(135deg, #FFD700 50%, transparent 50%);
+  background-position:
+    0 0,
+    calc(100% - 24px) calc(1em + 4px),
+    calc(100% - 16px) calc(1em + 4px);
+  background-size:
+    100% 100%,
+    8px 8px,
+    8px 8px;
+  background-repeat: no-repeat;
 }
 
 .position-select:hover {
-  border-color: #00A550;
+  border-color: #0052A3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
 .position-select:focus {
-  border-color: #00A550;
+  border-color: #FFD700;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 165, 80, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+.position-select option {
+  background: white;
+  color: #333;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.position-select option:first-child {
+  background: #f5f5f5;
+  color: #666;
+  font-style: italic;
 }
 
 /* Visual Mode */
@@ -158,26 +237,28 @@
 .square-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 12px;
+  gap: 20px;
   max-height: 400px;
   overflow-y: auto;
-  padding: 12px;
+  padding: 20px;
   background: #f9f9f9;
   border-radius: 12px;
 }
 
 .square-button {
   background: white;
-  border: 3px solid #CCCCCC;
-  border-radius: 10px;
-  padding: 12px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 0;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  align-items: stretch;
   min-height: 100px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .square-button:hover {
@@ -185,11 +266,77 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.square-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease;
+}
+
 .square-button.selected {
   background: #FFD700;
-  border-width: 4px;
-  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
-  transform: scale(1.08);
+  border-width: 3px;
+  border-color: #FFA500;
+  transform: translateY(-8px) scale(1.08);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(255, 215, 0, 0.5),
+    0 16px 32px rgba(255, 165, 0, 0.3),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  animation: cardSelectPulse 2s ease-in-out infinite;
+}
+
+.square-button.selected::after {
+  content: '✓';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #00A550;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0, 165, 80, 0.6);
+  z-index: 10;
+  animation: checkmarkPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 2px solid white;
+}
+
+.square-button.selected .square-color-bar {
+  animation: colorBarGlow 2s ease-in-out infinite;
+}
+
+@keyframes cardSelectPulse {
+  0%, 100% {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 8px 16px rgba(255, 215, 0, 0.5),
+      0 16px 32px rgba(255, 165, 0, 0.3),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.1),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 10px 20px rgba(255, 215, 0, 0.6),
+      0 20px 40px rgba(255, 165, 0, 0.4),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.1),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes colorBarGlow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.3);
+  }
 }
 
 .square-button:focus {
@@ -197,9 +344,26 @@
   outline-offset: 2px;
 }
 
+.square-color-bar {
+  height: 28px;
+  width: 100%;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.square-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  flex: 1;
+}
+
 .square-number {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: #666;
 }
 
@@ -208,7 +372,7 @@
 }
 
 .square-name {
-  font-size: 12px;
+  font-size: 11px;
   text-align: center;
   line-height: 1.2;
   font-weight: 600;
@@ -294,16 +458,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .position-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .toggle-button {
-    width: 100%;
-    justify-content: center;
-  }
-
   .current-position-badge {
     text-align: center;
   }
@@ -313,13 +467,35 @@
   }
 
   .square-grid {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 8px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+}
 
   .square-button {
     min-height: 80px;
-    padding: 8px;
+  }
+
+  .square-color-bar {
+    height: 22px;
+  }
+
+  .square-content {
+    padding: 6px;
+    gap: 2px;
+  }
+
+  .square-number {
+    font-size: 14px;
+  }
+
+  .square-icon {
+    font-size: 20px;
   }
 
   .square-name {

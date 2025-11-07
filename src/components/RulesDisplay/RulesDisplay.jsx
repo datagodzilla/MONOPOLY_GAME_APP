@@ -71,8 +71,17 @@ const RulesDisplay = ({ gameRule }) => {
       {/* Doubles Indicator */}
       {isDoubles && (
         <div className="doubles-indicator">
-          <span className="doubles-icon">🎲🎲</span>
-          <span className="doubles-text">Doubles! Roll Again!</span>
+          <div>
+            <span className="doubles-icon">🎲🎲</span>
+            <span className="doubles-text">Doubles! Roll Again!</span>
+          </div>
+          <div className="doubles-exception">
+            <strong>⚠️ EXCEPTION:</strong>
+            If you land on "Go To Jail", your turn ends immediately - you do NOT roll again! This applies even with Speed Die symbols (Mr. Monopoly, Bus, or Chance).
+          </div>
+          <div className="doubles-note">
+            ✅ For all other special squares (Chance, Community Chest, GO, Free Parking, Taxes, Jail/Just Visiting), handle the square action first, THEN roll again.
+          </div>
         </div>
       )}
 

@@ -89,10 +89,9 @@
 /* Doubles Indicator */
 .doubles-indicator {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   gap: 1rem;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   background: linear-gradient(135deg, var(--monopoly-gold) 0%, #FFA500 100%);
   border-radius: 12px;
   margin-bottom: 1.5rem;
@@ -109,6 +108,13 @@
   }
 }
 
+.doubles-indicator > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .doubles-icon {
   font-size: 2.5rem;
 }
@@ -119,6 +125,37 @@
   color: #333;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.doubles-exception {
+  background: linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(238, 90, 111, 0.3);
+}
+
+.doubles-exception strong {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.doubles-note {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-align: center;
+  color: #333;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  font-weight: 600;
 }
 
 /* Rule Section */
@@ -227,6 +264,20 @@
 
   .doubles-text {
     font-size: 1.4rem;
+  }
+
+  .doubles-exception {
+    font-size: 1.05rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .doubles-exception strong {
+    font-size: 1.15rem;
+  }
+
+  .doubles-note {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
   }
 
   .section-title {
