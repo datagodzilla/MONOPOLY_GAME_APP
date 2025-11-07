@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import DiceInput from './components/DiceInput/DiceInput'
 import DiceAnimation from './components/DiceAnimation/DiceAnimation'
@@ -15,6 +15,13 @@ function App() {
   const [gameRule, setGameRule] = useState(null);
   const [currentPosition, setCurrentPosition] = useState(null);
   const [movementResult, setMovementResult] = useState(null);
+
+  // Scroll to top when app loads or when returning to input phase
+  useEffect(() => {
+    if (currentPhase === 'input') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentPhase]);
 
   const handleRoll = (values) => {
     console.log('Dice rolled:', values);
