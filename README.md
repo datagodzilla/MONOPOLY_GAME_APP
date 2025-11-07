@@ -45,7 +45,9 @@ This project includes **agent-ai** capabilities for AI-assisted development usin
 ### 1. Open in VSCode/Claude Code
 
 ```bash
-cd /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+# Clone the repository
+git clone https://github.com/datagodzilla/MONOPOLY_GAME_APP.git
+cd MONOPOLY_GAME_APP
 code .
 ```
 

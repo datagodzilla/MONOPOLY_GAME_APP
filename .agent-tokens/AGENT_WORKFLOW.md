@@ -1,7 +1,7 @@
 # Agent Workflow Guide
 
 **Project**: MONOPOLY_GAME_APP
-**Workspace**: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+**Workspace**: [PROJECT_ROOT]
 **Created**: 2025-11-05T00:00:00Z
 
 ---
@@ -16,11 +16,11 @@
 ```
 @app-backend-developer
 
-WORKSPACE: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+WORKSPACE: [Run 'pwd' to get current workspace path]
 
 VERIFICATION REQUIRED:
 1. Run: pwd
-2. Verify output EXACTLY matches: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+2. Verify output matches your project root directory
 3. If mismatch: EXIT immediately with error
 
 PREREQUISITES: None (first agent)
@@ -46,11 +46,11 @@ OUTPUT: Create .agent-tokens/backend-complete.token when done
 ```
 @app-frontend-developer
 
-WORKSPACE: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+WORKSPACE: [Run 'pwd' to get current workspace path]
 
 VERIFICATION REQUIRED:
 1. Run: pwd
-2. Verify output EXACTLY matches: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+2. Verify output matches your project root directory
 3. If mismatch: EXIT immediately with error
 
 PREREQUISITES:
@@ -77,11 +77,11 @@ OUTPUT: Create .agent-tokens/frontend-complete.token when done
 ```
 @app-full-stack
 
-WORKSPACE: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+WORKSPACE: [Run 'pwd' to get current workspace path]
 
 VERIFICATION REQUIRED:
 1. Run: pwd
-2. Verify output EXACTLY matches: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+2. Verify output matches your project root directory
 3. If mismatch: EXIT immediately with error
 
 PREREQUISITES:
@@ -110,11 +110,11 @@ OUTPUT: Create .agent-tokens/integration-complete.token when done
 ```
 @app-spec-writer
 
-WORKSPACE: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+WORKSPACE: [Run 'pwd' to get current workspace path]
 
 VERIFICATION REQUIRED:
 1. Run: pwd
-2. Verify output EXACTLY matches: /Users/Wolverine/00_PROJECTS/MONOPOLY_GAME_APP
+2. Verify output matches your project root directory
 3. If mismatch: EXIT immediately with error
 
 PREREQUISITES:

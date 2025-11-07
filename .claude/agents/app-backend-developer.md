@@ -22,8 +22,8 @@ pwd
 ```
 
 **Compare output with expected workspace from prompt**:
-- If prompt says: `WORKSPACE: /Users/Wolverine/00_PROJECTS/my-app`
-- Then `pwd` output MUST be: `/Users/Wolverine/00_PROJECTS/my-app`
+- If prompt says: `WORKSPACE: /path/to/my-app`
+- Then `pwd` output MUST be: `/path/to/my-app`
 
 **If they DON'T match**:
 ```bash
